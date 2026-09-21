@@ -1,0 +1,10 @@
+import { router } from 'expo-router';
+import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { Header, Screen } from '../components/GamePassUI';
+import { colors, spacing } from '../constants/theme';
+
+export default function Settings() {
+  return <Screen><ScrollView contentContainerStyle={styles.content}><Pressable onPress={() => router.back()}><Text style={styles.back}>‹  Perfil</Text></Pressable><Header eyebrow="CONTA" title="Definições" /><Text style={styles.section}>PREFERÊNCIAS</Text><View style={styles.row}><Text style={styles.rowText}>Notificações</Text><Switch value onValueChange={() => undefined} trackColor={{ false: colors.border, true: colors.greenDark }} thumbColor={colors.text} /></View><View style={styles.row}><Text style={styles.rowText}>Reprodução automática</Text><Switch value onValueChange={() => undefined} trackColor={{ false: colors.border, true: colors.greenDark }} thumbColor={colors.text} /></View><Text style={styles.section}>APARÊNCIA</Text><View style={styles.row}><Text style={styles.rowText}>Tema escuro</Text><Text style={styles.value}>Ativado</Text></View><Text style={styles.section}>SOBRE</Text><Text style={styles.about}>Game Pass Mock 1.0.0{`\n`}Projeto acadêmico com dados estáticos.</Text></ScrollView></Screen>;
+}
+
+const styles = StyleSheet.create({ content: { paddingBottom: 30 }, back: { color: colors.muted, fontSize: 16, marginHorizontal: spacing.page, marginTop: 10 }, section: { color: colors.green, fontWeight: '900', fontSize: 11, letterSpacing: 1.3, marginHorizontal: spacing.page, marginTop: 24, marginBottom: 8 }, row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 17, paddingHorizontal: spacing.page, borderBottomWidth: 1, borderBottomColor: colors.border }, rowText: { color: colors.text, fontSize: 16 }, value: { color: colors.muted, fontSize: 14 }, about: { color: colors.muted, lineHeight: 23, marginHorizontal: spacing.page, fontSize: 14 }, });
