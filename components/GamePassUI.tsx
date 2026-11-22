@@ -34,10 +34,12 @@ export function GameCard({ game, compact = false }: { game: Game; compact?: bool
   );
 }
 
-export function BottomNav({ active }: { active: 'home' | 'library' | 'profile' }) {
+export function BottomNav({ active }: { active: 'home' | 'catalog' | 'library' | 'favorites' | 'profile' }) {
   const items = [
     { label: 'Início', icon: '⌂', href: '/home', key: 'home' as const },
+    { label: 'Catálogo', icon: '▦', href: '/catalog', key: 'catalog' as const },
     { label: 'Biblioteca', icon: '▣', href: '/library', key: 'library' as const },
+    { label: 'Favoritos', icon: '★', href: '/favorites', key: 'favorites' as const },
     { label: 'Perfil', icon: '◉', href: '/profile', key: 'profile' as const },
   ];
 
@@ -69,8 +71,8 @@ const styles = StyleSheet.create({
   meta: { color: colors.muted, fontSize: 13, marginBottom: 8 },
   rating: { color: colors.orange, fontSize: 13, fontWeight: '700' },
   nav: { flexDirection: 'row', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: colors.border, backgroundColor: colors.surface, paddingTop: 10, paddingBottom: 18 },
-  navItem: { alignItems: 'center', minWidth: 80 },
+  navItem: { alignItems: 'center', minWidth: 70 },
   navIcon: { color: colors.muted, fontSize: 22, marginBottom: 3 },
-  navLabel: { color: colors.muted, fontSize: 12, fontWeight: '600' },
+  navLabel: { color: colors.muted, fontSize: 11, fontWeight: '600' },
   active: { color: colors.green },
 });

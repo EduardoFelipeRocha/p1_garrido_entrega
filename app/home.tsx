@@ -15,12 +15,23 @@ export default function Home() {
           <Text style={styles.featureText}>Explore novos mundos em uma aventura épica.</Text>
           <Link href={{ pathname: '/details', params: { game: 'starfield' } }} style={styles.featureLink}>VER JOGO  ›</Link>
         </View>
+        <View style={styles.quickLinks}>
+          <Link href="/search" style={styles.quickLink}>⌕  Buscar jogos</Link>
+          <Link href="/deals" style={styles.quickLink}>🏷  Ofertas</Link>
+        </View>
         <Text style={styles.sectionTitle}>Recomendados para você</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
           {games.slice(0, 3).map((game) => <GameCard key={game.id} game={game} />)}
         </ScrollView>
         <Text style={styles.sectionTitle}>Continue jogando</Text>
-        <View style={styles.progressRow}><View style={styles.progressCover}><Text style={styles.progressInitial}>HA</Text></View><View style={styles.progressInfo}><Text style={styles.progressTitle}>Halo Infinite</Text><Text style={styles.meta}>Conquista 62% concluída</Text><View style={styles.track}><View style={styles.progress} /></View></View></View>
+        <View style={styles.progressRow}>
+          <View style={styles.progressCover}><Text style={styles.progressInitial}>HA</Text></View>
+          <View style={styles.progressInfo}>
+            <Text style={styles.progressTitle}>Halo Infinite</Text>
+            <Text style={styles.meta}>Conquista 62% concluída</Text>
+            <View style={styles.track}><View style={styles.progress} /></View>
+          </View>
+        </View>
       </ScrollView>
       <BottomNav active="home" />
     </Screen>
@@ -34,6 +45,8 @@ const styles = StyleSheet.create({
   featureTitle: { color: colors.text, fontSize: 34, fontWeight: '900' },
   featureText: { color: '#d4dfd9', fontSize: 14, marginTop: 5, marginBottom: 17 },
   featureLink: { color: colors.green, fontSize: 13, fontWeight: '900' },
+  quickLinks: { flexDirection: 'row', gap: 10, marginHorizontal: spacing.page, marginTop: 16 },
+  quickLink: { flex: 1, color: colors.green, backgroundColor: colors.surface, borderRadius: 8, padding: 13, textAlign: 'center', fontSize: 13, fontWeight: '800', overflow: 'hidden' },
   sectionTitle: { color: colors.text, fontSize: 19, fontWeight: '800', marginHorizontal: spacing.page, marginTop: 26, marginBottom: 13 },
   row: { paddingLeft: spacing.page },
   progressRow: { flexDirection: 'row', backgroundColor: colors.surface, marginHorizontal: spacing.page, borderRadius: 10, padding: 12 },
