@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import { GameCard, Header, Screen } from '../components/GamePassUI';
+import { BottomNav, GameCard, Header, Screen } from '../components/GamePassUI';
 import { games } from '../constants/games';
 import { getFavorites } from '../services/storage';
 import { colors, spacing } from '../constants/theme';
@@ -24,11 +24,12 @@ export default function Favorites() {
           <Text style={styles.empty}>Você ainda não salvou jogos. Abra os detalhes de um título e toque em favoritar.</Text>
         )}
       </ScrollView>
+      <BottomNav active="favorites" />
     </Screen>
   );
 }
 const styles = StyleSheet.create({
-  content: { paddingHorizontal: spacing.page, paddingBottom: 30 },
+  content: { flexGrow: 1, paddingHorizontal: spacing.page, paddingBottom: 30 },
   count: { color: colors.muted, marginBottom: 16 },
   empty: { color: colors.muted, lineHeight: 23, marginTop: 24, textAlign: 'center' },
 });
