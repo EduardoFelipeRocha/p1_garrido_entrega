@@ -34,10 +34,11 @@ export function GameCard({ game, compact = false }: { game: Game; compact?: bool
   );
 }
 
-export function BottomNav({ active }: { active: 'home' | 'catalog' | 'favorites' | 'profile' }) {
+export function BottomNav({ active }: { active: 'home' | 'catalog' | 'library' | 'favorites' | 'profile' }) {
   const items = [
     { label: 'Início', icon: '⌂', href: '/home', key: 'home' as const },
     { label: 'Catálogo', icon: '▦', href: '/catalog', key: 'catalog' as const },
+    { label: 'Biblioteca', icon: '▣', href: '/library', key: 'library' as const },
     { label: 'Favoritos', icon: '★', href: '/favorites', key: 'favorites' as const },
     { label: 'Perfil', icon: '◉', href: '/profile', key: 'profile' as const },
   ];
