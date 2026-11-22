@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Header, Screen } from '../components/GamePassUI';
+import { BottomNav, Header, Screen } from '../components/GamePassUI';
 import { colors, spacing } from '../constants/theme';
 import { fetchGameDeals, GameDeal } from '../services/deals';
 
@@ -12,42 +12,42 @@ export default function Deals() {
   const loadDeals = useCallback(async () => {
     setLoading(true);
     setError('');
-    try {
-      setItems(await fetchGameDeals());
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao consultar as ofertas.');
-    } finally {
-      setLoading(false);
-    }
+    try { setItems(await fetchGameDeals()); }
+    catch (err) { setError(err instanceof Error ? err.message : 'Erro ao consultar as ofertas.'); }
+    finally { setLoading(false); }
   }, []);
 
   return (
     <Screen>
-      <ScrollView contentContainerStyle={styles.content}>
-        <Header eyebrow="LOJA" title="Ofertas de jogos" />
-        <Text style={styles.description}>Preços consultados em tempo real na CheapShark.</Text>
-        <Pressable style={styles.button} onPress={loadDeals} disabled={loading}>
-          <Text style={styles.buttonText}>{loading ? 'BUSCANDO...' : 'CARREGAR OFERTAS'}</Text>
-        </Pressable>
-        {!!error && <Text style={styles.error}>{error}</Text>}
-        {items.map((item) => (
-          <View key={item.dealID} style={styles.card}>
-            <Image source={{ uri: item.thumb }} style={styles.cover} />
-            <View style={styles.info}>
-              <Text style={styles.name} numberOfLines={2}>{item.title}</Text>
-              <Text style={styles.price}>US$ {item.salePrice}</Text>
-              <Text style={styles.oldPrice}>Antes: US$ {item.normalPrice}</Text>
-              <Text style={styles.saving}>-{Math.round(Number(item.savings))}%</Text>
+      <View style={styles.screen}>
+        <ScrollView contentContainerStyle={styles.content}>
+          <Header eyebrow="LOJA" title="Ofertas de jogos" />
+          <Text style={styles.description}>Preços consultados em tempo real na CheapShark.</Text>
+          <Pressable style={styles.button} onPress={loadDeals} disabled={loading}>
+            <Text style={styles.buttonText}>{loading ? 'BUSCANDO...' : 'CARREGAR OFERTAS'}</Text>
+          </Pressable>
+          {!!error && <Text style={styles.error}>{error}</Text>}
+          {items.map((item) => (
+            <View key={item.dealID} style={styles.card}>
+              <Image source={{ uri: item.thumb }} style={styles.cover} />
+              <View style={styles.info}>
+                <Text style={styles.name} numberOfLines={2}>{item.title}</Text>
+                <Text style={styles.price}>US$ {item.salePrice}</Text>
+                <Text style={styles.oldPrice}>Antes: US$ {item.normalPrice}</Text>
+                <Text style={styles.saving}>-{Math.round(Number(item.savings))}%</Text>
+              </View>
             </View>
-          </View>
-        ))}
-        {!items.length && !loading && !error && <Text style={styles.empty}>Toque no botão para consultar as ofertas disponíveis.</Text>}
-      </ScrollView>
+          ))}
+          {!items.length && !loading && !error && <Text style={styles.empty}>Toque no botão para consultar as ofertas disponíveis.</Text>}
+        </ScrollView>
+        <BottomNav active="home" />
+      </View>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
-  content: { paddingHorizontal: spacing.page, paddingBottom: 30 },
+  screen: { flex: 1 },
+  content: { flexGrow: 1, paddingHorizontal: spacing.page, paddingBottom: 30 },
   description: { color: colors.muted, marginBottom: 16 },
   button: { backgroundColor: colors.green, borderRadius: 9, padding: 15, alignItems: 'center', marginBottom: 18 },
   buttonText: { color: colors.background, fontWeight: '900' },
